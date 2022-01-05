@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Lesson21Playground</string>
+    <string name="open_url_sample">Open url sample</string>
+    <string name="open_camera_sample">Open camera sample</string>
+    <string name="open_call_sample">Dialer sample</string>
+    <string name="open_url">Open https://google.com</string>
+    <string name="action_dial">Call</string>
+    <string name="hint_enter_phone_number">Enter phone number</string>
+    <string name="take_photo">Take photo</string>
+</resources>
