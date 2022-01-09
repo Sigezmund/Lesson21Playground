@@ -9,6 +9,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.teachmeskills.lesson21playground.R
 import com.teachmeskills.lesson21playground.databinding.FragmentCameraBinding
@@ -21,14 +22,18 @@ class CameraSampleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_camera, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentCameraBinding.bind(view).apply {
             this.selectPhoto.setOnClickListener {
-                dispatchTakePictureIntent()
+                try {
+                    dispatchTakePictureIntent()
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(context, "Camera couldn't be open", Toast.LENGTH_LONG).show()
+                    e.printStackTrace()
+                }
             }
         }
     }
@@ -43,15 +48,15 @@ class CameraSampleFragment : Fragment() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-            // Обязательно проверяем, что есть ли Activity, которая может обработать наш вызов
         } catch (e: ActivityNotFoundException) {
-            // display error state to the user
+            Toast.makeText(context, "Camera couldn't be open", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             binding?.photo?.setImageBitmap(imageBitmap)
         }
