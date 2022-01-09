@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,12 +47,13 @@ class CameraSampleFragment : Fragment() {
             // Обязательно проверяем, что есть ли Activity, которая может обработать наш вызов
         } catch (e: ActivityNotFoundException) {
             // display error state to the user
+            Log.d("Camera", "No program to handle intent")
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             binding?.photo?.setImageBitmap(imageBitmap)
         }
@@ -59,7 +61,6 @@ class CameraSampleFragment : Fragment() {
 
     companion object {
         private const val REQUEST_IMAGE_CAPTURE = 1
-
         @JvmStatic
         fun newInstance() = CameraSampleFragment()
     }

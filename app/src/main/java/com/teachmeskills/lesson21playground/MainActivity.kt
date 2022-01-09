@@ -9,10 +9,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // Эта проверка препятствует пересозданию фрагмента при перевороте экрана
         if (savedInstanceState == null) {
-
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, MainFragment.newInstance())
+                .commit()
         }
     }
 }
