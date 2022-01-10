@@ -1,5 +1,6 @@
 package com.teachmeskills.lesson21playground
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.teachmeskills.lesson21playground.camera.CameraSampleFragment
 import com.teachmeskills.lesson21playground.databinding.FragmentMainBinding
 import com.teachmeskills.lesson21playground.dialer.DialerSampleFragment
+import com.teachmeskills.lesson21playground.url.OpenUrlSampleFragment
 
 class MainFragment : Fragment() {
 
@@ -23,17 +25,27 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         FragmentMainBinding.bind(view).apply {
 
+            openUrlSample.setOnClickListener {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, OpenUrlSampleFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit()
+            }
+
             openCameraSample.setOnClickListener {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.action_bar_container, CameraSampleFragment.newInstance())
+                    .replace(R.id.fragmentContainer, CameraSampleFragment.newInstance())
+                    .addToBackStack(null)
                     .commit()
             }
 
             openCallSample.setOnClickListener {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.action_bar_container, DialerSampleFragment.newInstance())
+                    .replace(R.id.fragmentContainer, DialerSampleFragment.newInstance())
+                    .addToBackStack(null)
                     .commit()
             }
+
         }
     }
 

@@ -21,9 +21,9 @@ class DialerSampleFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_dialer, container, false)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        FragmentDialerBinding.bind(requireView()).apply {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        FragmentDialerBinding.bind(view).apply {
             actionCall.setOnClickListener {
                 val number = phoneNumber.text
                 startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number")))
