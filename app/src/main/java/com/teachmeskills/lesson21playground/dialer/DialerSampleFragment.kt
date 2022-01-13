@@ -1,5 +1,6 @@
 package com.teachmeskills.lesson21playground.dialer
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -21,12 +22,17 @@ class DialerSampleFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_dialer, container, false)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         FragmentDialerBinding.bind(requireView()).apply {
             actionCall.setOnClickListener {
                 val number = phoneNumber.text
-                startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number")))
+                try {
+                    startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number")))
+                } catch (e: ActivityNotFoundException) {
+
+                }
+
             }
         }
     }

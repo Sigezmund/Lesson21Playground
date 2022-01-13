@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, MainFragment.newInstance())
+                .commit()
         }
     }
 }
