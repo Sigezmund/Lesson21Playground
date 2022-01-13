@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.teachmeskills.lesson21playground">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
 <!--    Приложение установится только, если на телефоне есть камера-->
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />

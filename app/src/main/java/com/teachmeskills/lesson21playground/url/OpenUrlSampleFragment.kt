@@ -1,5 +1,6 @@
 package com.teachmeskills.lesson21playground.url
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -23,8 +24,12 @@ class OpenUrlSampleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         FragmentOpenUrlSampleBinding.bind(view).apply {
             this.openUrl.setOnClickListener {
-                                                                                                                                            }
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://google.com")))
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://google.com")))
+                } catch (e: ActivityNotFoundException) {
+
+                }
+            }
         }
 
 
